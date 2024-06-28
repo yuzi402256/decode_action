@@ -1,4 +1,4 @@
-//Fri Jun 28 2024 15:35:03 GMT+0000 (Coordinated Universal Time)
+//Fri Jun 28 2024 15:46:09 GMT+0000 (Coordinated Universal Time)
 //Base:https://github.com/echo094/decode-js
 //Modify:https://github.com/smallfawn/decode_action
 const _0x6ed4a1 = _0x4a89e9("望潮"),
