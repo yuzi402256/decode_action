@@ -8,6 +8,7 @@ python脚本同理 放入到input.py里面 等待60s左右即可在output.py看�
 Allow XXXX, and select non-XXXX, actions and reusable workflows）然后下面2个打勾(Allow actions created by GitHub,Allow actions by Marketplace verified creators)☑️最后按save保存结束
 
 脚本自适应检测加密方式
+![image](https://github.com/yuzi402256/decode_action/assets/167555481/0b5a2bd1-de1e-4fbb-9fde-b27d52b198f7)
 
 支持sojson [源jsjiami.v6]
 
