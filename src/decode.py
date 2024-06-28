@@ -4,7 +4,9 @@ import zlib
 import lzma
 import gzip
 from datetime import datetime
-
+#from Crypto.Cipher import AES
+#from cryptography.fernet import Fernet
+#from Crypto.Cipher import ChaCha20
 # 获取当前日期和时间
 now = datetime.now()
 
@@ -66,6 +68,11 @@ def extract_base64_encoded(data):
     return encoded_string
 
 
+def Encoded_script_decode(data):
+
+    return
+
+
 def decrypt_nested(data):
     while True:
         new_data = try_decode_base64(data)
@@ -74,7 +81,16 @@ def decrypt_nested(data):
         # print("解密后的数据：", new_data)
         if "exec(" in str(new_data):
             # 更新 decrypted_data 以便下一次循环使用
-            data = extract_base64_encoded(str(new_data))
+            if "Encoded script" in str(new_data):
+                new_data = "该加密未适配 敬请期待"
+                print("该加密未适配 敬请期待")
+                break
+            elif "exec(" in str(new_data):
+                data = extract_base64_encoded(str(new_data))
+            else:
+                print("未知 加密 无法进一步解密")
+                new_data = "未知 加密 无法进一步解密"
+                break  # 如果 new_data 中不再包含 "exec"，跳出循环
             # print(data)
         else:
             print("无法进一步解密，退出循环")
@@ -83,17 +99,28 @@ def decrypt_nested(data):
     return new_data  # 返回最终解密后的数据
 
 
-with open('./input.py', 'r') as file:
+with open('./input.py', 'r', encoding='utf-8') as file:
     # 读取文件内容
     content = file.read().strip()
     # 打印内容
     encoded_data = extract_base64_encoded(content)
-    #print(encoded_data)
+    # print(encoded_data)
 # 解密嵌套加密数据
 final_decrypted_data = decrypt_nested(encoded_data)
-final_decrypted_data_str = final_decrypted_data.decode('utf-8')  # 根据实际编码调整 utf-8
 # 输出最终解密结果
-print("最终解密结果:")
-print("#"+formatted_date + "\n"+final_decrypted_data)
-with open("./onput.py", 'wb') as f:
-    f.write(final_decrypted_data)
+# print("最终解密结果:")
+def process_data(data):
+    if isinstance(data, str):
+        # 如果是字符串，则编码为字节对象
+        byte_data = data.encode('utf-8')
+    elif isinstance(data, bytes):
+        # 如果已经是字节对象，则直接使用
+        byte_data = data
+    else:
+        # 如果不是字符串也不是字节对象，抛出异常或做其他处理
+        raise TypeError("Expected string or bytes-like object")
+    return byte_data
+
+print(final_decrypted_data)
+with open("./output.py", 'wb') as f:
+    f.write(process_data("#")+process_data(formatted_date)+process_data("\n")+process_data(final_decrypted_data))
